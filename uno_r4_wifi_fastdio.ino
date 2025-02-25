@@ -51,7 +51,6 @@ void setup()
 
 unsigned char char_val; 
 
-unsigned int cnt=0;
 unsigned long startTime, endTime, elapsedTime=0;
 
 double digitalReadTime, digitalWriteHighTime, digitalWriteLowTime;
@@ -88,7 +87,7 @@ void loop() {
   elapsedTime = DWT->CYCCNT-startTime;
   digitalWriteHighTime = ((elapsedTime / FREQ_CPU) * 1000000000.0f) / NMB_OF_WRITE_OPS;
 
-  // Read status directly from pin D9 register
+  // Read status directly from pin D13 register
   startTime = DWT->CYCCNT;
   for (int i=0; i<NMB_OF_WRITE_OPS; i++) {
     char_val = *PFS_P102PFS_BY;
@@ -96,7 +95,7 @@ void loop() {
   elapsedTime = DWT->CYCCNT-startTime;
   regDigitalReadTime = ((elapsedTime / FREQ_CPU) * 1000000000.0f) / NMB_OF_WRITE_OPS;
 
-  // Write LOW (clear) directly to pin D9 register
+  // Write LOW (clear) directly to pin D13 register
   startTime = DWT->CYCCNT;
   for (int i=0; i<NMB_OF_WRITE_OPS; i++) {
     *PFS_P102PFS_BY = 0x05;
@@ -104,7 +103,7 @@ void loop() {
   elapsedTime = DWT->CYCCNT-startTime;
   regDigitalWriteLowTime = ((elapsedTime / FREQ_CPU) * 1000000000.0f) / NMB_OF_WRITE_OPS;
 
-  // Write High (set) directly to pin D9 register
+  // Write High (set) directly to pin D13 register
   startTime = DWT->CYCCNT;
   for (int i=0; i<NMB_OF_WRITE_OPS; i++) {
     *PFS_P102PFS_BY = 0x04;
