@@ -47,6 +47,14 @@ void setup()
   Serial.println("Fast PIN test");
   /* Reset CPU cycle counter */
   CPU_RESET_CYCLECOUNTER;
+  
+  // Pin mode isn't needed for register based read/write
+  // below is added as pin#5,6 are using native digitalRead(), digitalWrite() functions
+  pinMode(5, INPUT);
+  pinMode(6, OUTPUT);
+  
+  
+  
 }
 
 unsigned char char_val; 
@@ -74,7 +82,7 @@ void loop() {
   // Measure digitalWrite(pin, LOW) elapsed time
   startTime = DWT->CYCCNT;
   for (int i=0; i<NMB_OF_WRITE_OPS; i++) {
-    digitalWrite(5,LOW);
+    digitalWrite(6,LOW);
   }
   elapsedTime = DWT->CYCCNT-startTime;
   digitalWriteLowTime = ((elapsedTime / FREQ_CPU) * 1000000000.0f) / NMB_OF_WRITE_OPS;
@@ -82,7 +90,7 @@ void loop() {
   // Measure digitalWrite(pin#, HIGH) elapsed time
   startTime = DWT->CYCCNT;
   for (int i=0; i<NMB_OF_WRITE_OPS; i++) {
-    digitalWrite(5,HIGH);
+    digitalWrite(6,HIGH);
   }
   elapsedTime = DWT->CYCCNT-startTime;
   digitalWriteHighTime = ((elapsedTime / FREQ_CPU) * 1000000000.0f) / NMB_OF_WRITE_OPS;
