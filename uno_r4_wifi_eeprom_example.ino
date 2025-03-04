@@ -53,8 +53,8 @@ void setup() {
     pinMode(pin_no, INPUT);
   }
 
-  // configure digital pin D8 as output
-  pinMode(8, OUTPUT);
+  // configure digital pin D8 as fire alarm reset input
+  pinMode(8, INPUT);
 }
 
 void loop() {
